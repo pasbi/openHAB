@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+sudo sed 's/hostname=.*/hostname=openhab/' -i /etc/openhabian.conf
+sudo openhabian-config unattended
+
 sudo gpasswd -a $USER dialout
 wget -O - http://phoscon.de/apt/deconz.pub.key | sudo apt-key add -
 sudo sh -c "echo 'deb http://phoscon.de/apt/deconz $(lsb_release -cs) main' > /etc/apt/sources.list.d/deconz.list"
-sudo apt update
-sudo apt install deconz
+sudo apt update -y
+sudo apt install deconz -y
 sudo systemctl enable deconz
